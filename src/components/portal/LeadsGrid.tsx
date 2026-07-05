@@ -12,9 +12,11 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
-import { DataGrid, type GridColDef } from "@mui/x-data-grid";
+import { DataGrid, type GridColDef, type GridRowParams } from "@mui/x-data-grid";
 import StatusChip from "./StatusChip";
 import { LEAD_STATUSES, type LeadStatus } from "./leadStatus";
+import LeadDetailDrawer from "./LeadDetailDrawer";
+import AddLeadDialog from "./AddLeadDialog";
 
 export type LeadRow = {
   id: string;
@@ -115,6 +117,8 @@ const FILTERS: (LeadStatus | "all")[] = ["all", ...LEAD_STATUSES];
 export default function LeadsGrid({ leads }: { leads: LeadRow[] }) {
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<LeadStatus | "all">("all");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [addOpen, setAddOpen] = useState(false);
 
   const rows = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -189,7 +193,13 @@ export default function LeadsGrid({ leads }: { leads: LeadRow[] }) {
           ))}
         </ToggleButtonGroup>
 
-        <Button variant="contained" color="secondary" startIcon={<AddIcon />} sx={{ ml: "auto" }}>
+        <Button
+          variant="contained"
+          color="secondary"
+          startIcon={<AddIcon />}
+          sx={{ ml: "auto" }}
+          onClick={() => setAddOpen(true)}
+        >
           Add lead
         </Button>
       </Box>
@@ -200,6 +210,7 @@ export default function LeadsGrid({ leads }: { leads: LeadRow[] }) {
         density="standard"
         autoHeight
         disableRowSelectionOnClick
+        onRowClick={(params: GridRowParams<LeadRow>) => setSelectedId(params.row.id)}
         hideFooterSelectedRowCount
         pageSizeOptions={[10, 25]}
         initialState={{ pagination: { paginationModel: { pageSize: 10, page: 0 } } }}
@@ -219,10 +230,18 @@ export default function LeadsGrid({ leads }: { leads: LeadRow[] }) {
           "& .MuiDataGrid-columnHeader:focus, & .MuiDataGrid-columnHeader:focus-within": {
             outline: "none",
           },
+          "& .MuiDataGrid-row": { cursor: "pointer" },
           "& .MuiDataGrid-row:hover": { bgcolor: "background.default" },
           "& .MuiDataGrid-footerContainer": { borderColor: "divider" },
         }}
       />
+
+      <LeadDetailDrawer
+        open={selectedId !== null}
+        leadId={selectedId}
+        onClose={() => setSelectedId(null)}
+      />
+      <AddLeadDialog open={addOpen} onClose={() => setAddOpen(false)} />
     </Paper>
   );
 }
