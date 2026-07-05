@@ -1,7 +1,48 @@
 import { NextResponse } from "next/server";
 import type { BookResponse } from "@/lib/cal";
+import { db } from "@/db";
+import { leads, leadEvents } from "@/db/schema";
 
 export const dynamic = "force-dynamic";
+
+/**
+ * Persist the inbound lead. Never throws — lead capture must not break the
+ * user's booking confirmation. Returns silently if the DB/env isn't configured.
+ */
+async function persistLead(
+  parsed: ValidatedBody,
+  opts: { status: "new" | "scheduled"; calBookingUid?: string; calStart?: string },
+) {
+  const teamId = process.env.DEFAULT_TEAM_ID;
+  if (!teamId) return;
+  try {
+    const [lead] = await db
+      .insert(leads)
+      .values({
+        teamId,
+        name: parsed.name,
+        email: parsed.email,
+        branch: parsed.branch,
+        focus: parsed.focus || null,
+        notes: parsed.notes || null,
+        timezone: parsed.timeZone,
+        status: opts.status,
+        calBookingUid: opts.calBookingUid ?? null,
+        calStart: opts.calStart ? new Date(opts.calStart) : null,
+      })
+      .returning({ id: leads.id });
+    if (lead) {
+      await db.insert(leadEvents).values({
+        leadId: lead.id,
+        actor: null,
+        type: "created",
+        body: `Lead captured from the consultation form (${parsed.branch})`,
+      });
+    }
+  } catch (err) {
+    console.error("cal/book: persistLead failed (booking unaffected):", err);
+  }
+}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -61,6 +102,7 @@ export async function POST(req: Request) {
   const eventTypeId = process.env.CAL_EVENT_TYPE_ID;
 
   if (!apiKey || !eventTypeId) {
+    await persistLead(parsed, { status: "new" });
     const body: BookResponse = { success: true, simulated: true };
     return NextResponse.json(body);
   }
@@ -93,11 +135,20 @@ export async function POST(req: Request) {
       const text = await res.text().catch(() => "");
       throw new Error(`Cal.com bookings API responded ${res.status}: ${text}`);
     }
+    const json = (await res.json().catch(() => null)) as {
+      data?: { uid?: string; start?: string };
+    } | null;
+    await persistLead(parsed, {
+      status: "scheduled",
+      calBookingUid: json?.data?.uid,
+      calStart: json?.data?.start ?? parsed.start,
+    });
     const body: BookResponse = { success: true };
     return NextResponse.json(body);
   } catch (err) {
     // ponytail: per spec, a Cal API failure still resolves as a simulated success
     console.error("cal/book: Cal API error, returning simulated success:", err);
+    await persistLead(parsed, { status: "new" });
     const body: BookResponse = { success: true, simulated: true };
     return NextResponse.json(body);
   }

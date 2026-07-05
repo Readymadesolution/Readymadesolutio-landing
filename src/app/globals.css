@@ -11,15 +11,29 @@
 
   /* Readymade brand palette (from Figma variables) */
   --color-primary-100: #d9f6ef;
+  --color-primary-200: #b3eddf;
   --color-primary-500: #45d2af;
   --color-brand: #17ddbc;
   --color-secondary-0: #fcfcfc;
   --color-secondary-100: #edecec;
+  --color-secondary-200: #b9b9b9;
   --color-secondary-300: #a2a2a2;
-  --color-secondary-500: #6d6d6d;
+  --color-secondary-500: #747474;
+  --color-secondary-600: #5d5d5d;
+  --color-secondary-700: #26a564;
   --color-secondary-800: #2e2e2e;
   --color-secondary-900: #171717;
   --color-neutral-300: #d2d2d2;
+  --color-neutral-700: #777777;
+
+  /* Figma semantic extras used across the console UI */
+  --color-hairline: #e8ebe6; /* card / divider border */
+  --color-ink: #0e0f0c; /* deep heading text */
+  --color-muted: #454745; /* body grey */
+  --color-success: #1fc16b; /* Green/200 */
+  --color-danger: #d00416; /* Red/200 */
+
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
 
   /* Faktum Test (bundled OTF); Hanken Grotesk covers any glyphs the trial cut lacks */
   --font-display: var(--font-faktum), var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
