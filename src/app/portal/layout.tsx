@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import MuiProvider from "@/components/portal/MuiProvider";
 import Shell from "@/components/portal/Shell";
 
 export const metadata: Metadata = {
@@ -11,5 +12,9 @@ export default function PortalLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <Shell>{children}</Shell>;
+  return (
+    <MuiProvider>
+      <Shell>{children}</Shell>
+    </MuiProvider>
+  );
 }

@@ -1,7 +1,7 @@
 import { desc } from "drizzle-orm";
 import { db } from "@/db";
 import { leads } from "@/db/schema";
-import LeadsView, { type LeadRow } from "@/components/portal/LeadsView";
+import LeadsGrid, { type LeadRow } from "@/components/portal/LeadsGrid";
 
 export const dynamic = "force-dynamic";
 
@@ -20,5 +20,5 @@ export default async function LeadsPage() {
     createdAt: l.createdAt.toISOString(),
   }));
 
-  return <LeadsView leads={data} />;
+  return <LeadsGrid leads={data} />;
 }

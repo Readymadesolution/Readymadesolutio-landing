@@ -1,3 +1,10 @@
+"use client";
+
+import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import ConstructionOutlined from "@mui/icons-material/ConstructionOutlined";
+
 export default function ComingSoon({
   title,
   note,
@@ -6,15 +13,39 @@ export default function ComingSoon({
   note: string;
 }) {
   return (
-    <div className="mx-auto max-w-[1200px]">
-      <div className="flex flex-col items-center gap-2 rounded-[16px] border border-dashed border-hairline bg-white px-6 py-20 text-center">
-        <p className="font-sans text-[16px] font-semibold text-secondary-900">
-          {title}
-        </p>
-        <p className="max-w-[360px] font-sans text-[13.5px] text-secondary-500">
-          {note}
-        </p>
-      </div>
-    </div>
+    <Card
+      variant="outlined"
+      sx={{
+        borderStyle: "dashed",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 1.5,
+        px: 3,
+        py: 10,
+        textAlign: "center",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          width: 48,
+          height: 48,
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 3,
+          bgcolor: "primary.light",
+          color: "primary.dark",
+        }}
+      >
+        <ConstructionOutlined />
+      </Box>
+      <Typography sx={{ fontSize: 16, fontWeight: 700, color: "text.primary" }}>
+        {title}
+      </Typography>
+      <Typography sx={{ maxWidth: 360, fontSize: 13.5, color: "text.secondary" }}>
+        {note}
+      </Typography>
+    </Card>
   );
 }

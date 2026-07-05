@@ -1,46 +1,71 @@
-export type LeadStatus = "new" | "contacted" | "scheduled" | "won" | "lost";
+"use client";
 
-/* All colors from the Figma token set. Dot conveys real semantic state. */
-const STYLES: Record<LeadStatus, { wrap: string; dot: string; label: string }> = {
-  new: { wrap: "bg-primary-100 text-secondary-900", dot: "bg-primary-500", label: "New" },
+import Chip from "@mui/material/Chip";
+import Box from "@mui/material/Box";
+import { alpha, type Theme } from "@mui/material/styles";
+import type { SxProps } from "@mui/material/styles";
+import type { LeadStatus } from "./leadStatus";
+
+export type { LeadStatus } from "./leadStatus";
+export { LEAD_STATUSES } from "./leadStatus";
+
+/** Chip styling per status — all derived from the brand theme tokens. */
+const META: Record<
+  LeadStatus,
+  { label: string; sx: SxProps<Theme>; dot: (t: Theme) => string }
+> = {
+  new: {
+    label: "New",
+    sx: { bgcolor: "primary.light", color: "primary.dark" },
+    dot: (t) => t.palette.primary.main,
+  },
   contacted: {
-    wrap: "bg-secondary-100 text-secondary-600",
-    dot: "bg-secondary-300",
     label: "Contacted",
+    sx: { bgcolor: "grey.200", color: "text.secondary" },
+    dot: (t) => t.palette.grey[500],
   },
   scheduled: {
-    wrap: "bg-primary-200 text-[#0e0f0c]",
-    dot: "bg-secondary-700",
     label: "Scheduled",
+    sx: { bgcolor: "secondary.main", color: "secondary.contrastText" },
+    dot: (t) => t.palette.primary.main,
   },
   won: {
-    wrap: "bg-[#26a564]/12 text-secondary-700",
-    dot: "bg-[#1fc16b]",
     label: "Won",
+    sx: {
+      bgcolor: (t: Theme) => alpha(t.palette.success.main, 0.14),
+      color: "success.main",
+    },
+    dot: (t) => t.palette.success.main,
   },
   lost: {
-    wrap: "bg-[#d00416]/10 text-[#d00416]",
-    dot: "bg-[#d00416]",
     label: "Lost",
+    sx: {
+      bgcolor: (t: Theme) => alpha(t.palette.error.main, 0.1),
+      color: "error.main",
+    },
+    dot: (t) => t.palette.error.main,
   },
 };
 
-export const LEAD_STATUSES: LeadStatus[] = [
-  "new",
-  "contacted",
-  "scheduled",
-  "won",
-  "lost",
-];
-
 export default function StatusChip({ status }: { status: LeadStatus }) {
-  const s = STYLES[status] ?? STYLES.new;
+  const m = META[status] ?? META.new;
   return (
-    <span
-      className={`inline-flex items-center gap-[6px] rounded-full px-[10px] py-[4px] font-sans text-[12px] font-medium leading-[16px] ${s.wrap}`}
-    >
-      <span className={`size-[6px] rounded-full ${s.dot}`} aria-hidden />
-      {s.label}
-    </span>
+    <Chip
+      size="small"
+      label={m.label}
+      icon={
+        <Box
+          component="span"
+          sx={{
+            width: 6,
+            height: 6,
+            borderRadius: "50%",
+            bgcolor: m.dot,
+            ml: 1,
+          }}
+        />
+      }
+      sx={{ fontWeight: 600, fontSize: 12, ...m.sx }}
+    />
   );
 }
