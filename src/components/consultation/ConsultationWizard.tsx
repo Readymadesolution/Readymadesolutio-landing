@@ -421,7 +421,7 @@ export default function ConsultationWizard() {
             />
           ) : (
             <div
-              className={`flex-1 min-w-0 bg-white border-[1.128px] border-[#e8ebe6] rounded-[27.07px] shadow-[0px_33.838px_78.955px_-45.117px_rgba(14,15,12,0.36)] overflow-hidden ${
+              className={`flex-1 min-w-0 max-lg:w-full bg-white border-[1.128px] border-[#e8ebe6] rounded-[27.07px] shadow-[0px_33.838px_78.955px_-45.117px_rgba(14,15,12,0.36)] overflow-hidden ${
                 step === 1 ? "min-h-[529px]" : step === 3 ? "min-h-[819px]" : ""
               }`}
             >
