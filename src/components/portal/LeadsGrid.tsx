@@ -217,6 +217,8 @@ export default function LeadsGrid({ leads }: { leads: LeadRow[] }) {
         sx={{
           border: 0,
           "--DataGrid-rowBorderColor": (t) => t.palette.divider,
+          // Vertically center every cell so all columns share one baseline.
+          "& .MuiDataGrid-cell": { display: "flex", alignItems: "center" },
           "& .MuiDataGrid-columnHeaders .MuiDataGrid-columnHeader": { bgcolor: "grey.100" },
           "& .MuiDataGrid-columnHeader": { bgcolor: "grey.100" },
           "& .MuiDataGrid-columnHeaderTitle": {

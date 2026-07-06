@@ -1,10 +1,5 @@
-import ComingSoon from "@/components/portal/ComingSoon";
+import TeamView from "@/components/portal/TeamView";
 
 export default function TeamPage() {
-  return (
-    <ComingSoon
-      title="Team"
-      note="Invite teammates, set roles, and manage access here once Neon Auth is wired up."
-    />
-  );
+  return <TeamView />;
 }
