@@ -103,21 +103,21 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="flex w-full flex-col gap-4 md:w-[208px]">
+          <div className="flex w-full flex-col gap-4 md:w-[240px]">
             <p className="text-[16px] font-bold uppercase leading-[24px] text-primary-500">
               Contact
             </p>
             <ul className="flex flex-col gap-[11px] text-[16px] leading-[24px] text-neutral-300">
               <li>
-                <a href="mailto:hello@readymade.io">hello@readymade.io</a>
+                <a href="mailto:info@readymadesolution.com">info@readymadesolution.com</a>
               </li>
               <li>
-                <a href="tel:+10000000000">+1 (000) 000-0000</a>
+                <a href="tel:+12046745873">+1 (204) 674-5873</a>
               </li>
               <li>
-                120 Innovation Way,
+                330 5th Avenue SW, Suite 1800,
                 <br />
-                Suite 400
+                Calgary, Alberta, T2P 0L4, Canada
               </li>
             </ul>
           </div>
