@@ -3,6 +3,7 @@ import {
   pgSchema,
   uuid,
   text,
+  integer,
   timestamp,
   pgEnum,
   index,
@@ -166,6 +167,18 @@ export const auditLog = pgTable(
   },
   (t) => [index("audit_team_idx").on(t.teamId)],
 );
+
+/* ---- monthly performance goals (one row per team) ---- */
+export const goals = pgTable("goals", {
+  teamId: uuid("team_id").primaryKey(),
+  leadsTarget: integer("leads_target").notNull().default(0),
+  meetingsTarget: integer("meetings_target").notNull().default(0),
+  wonTarget: integer("won_target").notNull().default(0),
+  winRateTarget: integer("win_rate_target").notNull().default(0), // percent 0-100
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+export type Goals = typeof goals.$inferSelect;
 
 export type Lead = typeof leads.$inferSelect;
 export type NewLead = typeof leads.$inferInsert;

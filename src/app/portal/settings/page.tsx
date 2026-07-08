@@ -1,10 +1,15 @@
-import ComingSoon from "@/components/portal/ComingSoon";
+import SettingsView from "@/components/portal/SettingsView";
+import { getGoals } from "@/app/portal/goals-actions";
 
-export default function SettingsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function SettingsPage() {
+  const goals = await getGoals();
   return (
-    <ComingSoon
-      title="Settings"
-      note="Workspace, Cal.com, and notification settings will live here."
+    <SettingsView
+      goals={goals}
+      calEventId={process.env.CAL_EVENT_TYPE_ID ?? null}
+      calUser={process.env.CAL_USERNAME ?? null}
     />
   );
 }

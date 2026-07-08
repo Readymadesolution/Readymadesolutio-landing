@@ -8,47 +8,48 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
+import LinearProgress from "@mui/material/LinearProgress";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
-import { useTheme } from "@mui/material/styles";
-import { BarChart } from "@mui/x-charts/BarChart";
-import PeopleAltOutlined from "@mui/icons-material/PeopleAltOutlined";
-import FiberNewOutlined from "@mui/icons-material/FiberNewOutlined";
-import EventAvailableOutlined from "@mui/icons-material/EventAvailableOutlined";
-import EmojiEventsOutlined from "@mui/icons-material/EmojiEventsOutlined";
-import type { SvgIconComponent } from "@mui/icons-material";
+import { useTheme, alpha } from "@mui/material/styles";
+import { LineChart } from "@mui/x-charts/LineChart";
+import TrendingUpOutlined from "@mui/icons-material/TrendingUpOutlined";
+import CheckCircleOutlined from "@mui/icons-material/CheckCircleOutlined";
+import WarningAmberOutlined from "@mui/icons-material/WarningAmberOutlined";
 import StatusChip from "./StatusChip";
-import { LEAD_STATUSES, type LeadStatus } from "./leadStatus";
+import type { LeadStatus } from "./leadStatus";
+
+export type GoalProgress = {
+  label: string;
+  actual: number;
+  target: number;
+  percent: number;
+  onTrack: boolean;
+  isRate: boolean;
+};
 
 export type DashboardData = {
-  kpis: { total: number; newThisWeek: number; scheduled: number; winRate: number };
-  statusCounts: number[];
+  goals: GoalProgress[];
+  trend: { month: string; leads: number; meetings: number }[];
+  funnel: { label: string; count: number }[];
+  conversion: number;
+  totalLeads: number;
   needsAttention: { id: string; name: string; sub: string; status: LeadStatus }[];
   upcoming: { id: string; name: string; focus: string | null; calStart: string }[];
 };
 
-const KPI_META: { key: keyof DashboardData["kpis"]; label: string; icon: SvgIconComponent; suffix?: string }[] = [
-  { key: "total", label: "Total leads", icon: PeopleAltOutlined },
-  { key: "newThisWeek", label: "New this week", icon: FiberNewOutlined },
-  { key: "scheduled", label: "Scheduled meetings", icon: EventAvailableOutlined },
-  { key: "winRate", label: "Win rate", icon: EmojiEventsOutlined, suffix: "%" },
-];
+const MONO = (t: import("@mui/material/styles").Theme) =>
+  t.typography.caption.fontFamily;
 
-function StatCard({
-  label,
-  value,
-  icon: Icon,
-}: {
-  label: string;
-  value: string;
-  icon: SvgIconComponent;
-}) {
+function GoalCard({ g }: { g: GoalProgress }) {
+  const fmt = (n: number) => (g.isRate ? `${n}%` : `${n}`);
   return (
-    <Card sx={{ p: 2.5, height: "100%" }}>
-      <Box sx={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+    <Card sx={{ p: 2.5, height: "100%", display: "flex", flexDirection: "column", gap: 1.5 }}>
+      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Typography
           sx={{
             fontSize: 11.5,
@@ -58,87 +59,192 @@ function StatCard({
             color: "text.secondary",
           }}
         >
-          {label}
+          {g.label}
         </Typography>
-        <Box
+        <Chip
+          size="small"
+          icon={
+            g.onTrack ? (
+              <CheckCircleOutlined sx={{ fontSize: 14, ml: 0.75 }} />
+            ) : (
+              <WarningAmberOutlined sx={{ fontSize: 14, ml: 0.75 }} />
+            )
+          }
+          label={g.onTrack ? "On track" : "Behind"}
           sx={{
-            display: "flex",
-            width: 32,
-            height: 32,
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 2,
-            bgcolor: "primary.light",
-            color: "primary.dark",
+            fontWeight: 600,
+            fontSize: 11,
+            height: 22,
+            bgcolor: (t) =>
+              alpha(g.onTrack ? t.palette.success.main : t.palette.text.primary, 0.1),
+            color: g.onTrack ? "success.main" : "text.primary",
+            "& .MuiChip-icon": { color: "inherit" },
           }}
-        >
-          <Icon sx={{ fontSize: 18 }} />
-        </Box>
+        />
       </Box>
-      <Typography sx={{ mt: 1.5, fontFamily: (t) => t.typography.caption.fontFamily, fontSize: 34, fontWeight: 700, lineHeight: 1, color: "text.primary" }}>
-        {value}
-      </Typography>
+
+      <Box sx={{ display: "flex", alignItems: "baseline", gap: 0.75 }}>
+        <Typography sx={{ fontFamily: MONO, fontSize: 30, fontWeight: 700, lineHeight: 1, color: "text.primary" }}>
+          {fmt(g.actual)}
+        </Typography>
+        <Typography sx={{ fontFamily: MONO, fontSize: 15, fontWeight: 600, color: "text.secondary" }}>
+          / {fmt(g.target)}
+        </Typography>
+      </Box>
+
+      <Box sx={{ mt: "auto" }}>
+        <LinearProgress
+          variant="determinate"
+          value={g.percent}
+          sx={{
+            height: 8,
+            borderRadius: 5,
+            bgcolor: (t) => alpha(t.palette.text.primary, 0.08),
+            "& .MuiLinearProgress-bar": {
+              borderRadius: 5,
+              bgcolor: (t) => (g.onTrack ? t.palette.success.main : t.palette.secondary.main),
+            },
+          }}
+        />
+        <Typography sx={{ mt: 0.75, fontSize: 11.5, color: "text.secondary" }}>
+          {g.percent}% of goal
+        </Typography>
+      </Box>
     </Card>
   );
 }
 
 export default function DashboardView({ data }: { data: DashboardData }) {
   const theme = useTheme();
-  const { kpis, statusCounts, needsAttention, upcoming } = data;
+  const { goals, trend, funnel, conversion, totalLeads, needsAttention, upcoming } = data;
 
-  const labels = LEAD_STATUSES.map((s) => s[0].toUpperCase() + s.slice(1));
-  const barColors = [
+  const funnelColors = [
     theme.palette.primary.main,
     theme.palette.grey[500],
     theme.palette.secondary.main,
     theme.palette.success.main,
     theme.palette.error.main,
   ];
+  const funnelMax = Math.max(1, ...funnel.map((f) => f.count));
 
   return (
     <Grid container spacing={2.5}>
-      {/* KPI row */}
-      {KPI_META.map((k) => (
-        <Grid key={k.key} size={{ xs: 6, md: 3 }}>
-          <StatCard
-            label={k.label}
-            value={`${kpis[k.key]}${k.suffix ?? ""}`}
-            icon={k.icon}
-          />
+      {/* Goal progress row */}
+      {goals.map((g) => (
+        <Grid key={g.label} size={{ xs: 6, md: 3 }}>
+          <GoalCard g={g} />
         </Grid>
       ))}
 
-      {/* Pipeline chart */}
-      <Grid size={{ xs: 12, md: 12 }}>
+      {/* Trend chart */}
+      <Grid size={{ xs: 12, md: 7 }}>
         <Card sx={{ p: 2.5, height: "100%" }}>
-          <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 700 }}>
-            Pipeline
-          </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
+            <TrendingUpOutlined sx={{ fontSize: 18, color: "primary.main" }} />
+            <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 700 }}>
+              Leads &amp; meetings — last 6 months
+            </Typography>
+          </Box>
           <Typography sx={{ fontSize: 13, color: "text.secondary", mb: 1 }}>
-            Leads by status
+            New leads created vs. meetings booked
           </Typography>
-          <BarChart
-            height={288}
-            borderRadius={8}
-            margin={{ top: 16, right: 8, bottom: 24, left: 8 }}
+          <LineChart
+            height={300}
+            margin={{ top: 16, right: 12, bottom: 24, left: 8 }}
             xAxis={[
               {
-                data: labels,
-                scaleType: "band",
-                colorMap: { type: "ordinal", values: labels, colors: barColors },
+                data: trend.map((t) => t.month),
+                scaleType: "point",
                 tickLabelStyle: { fontSize: 12, fill: theme.palette.text.secondary },
               },
             ]}
             yAxis={[
               {
                 tickMinStep: 1,
+                width: 32,
                 tickLabelStyle: { fontSize: 12, fill: theme.palette.text.secondary },
               },
             ]}
-            series={[{ data: statusCounts, label: "Leads" }]}
+            series={[
+              {
+                data: trend.map((t) => t.leads),
+                label: "Leads",
+                color: theme.palette.primary.main,
+                curve: "monotoneX",
+                area: true,
+              },
+              {
+                data: trend.map((t) => t.meetings),
+                label: "Meetings",
+                color: theme.palette.secondary.main,
+                curve: "monotoneX",
+              },
+            ]}
             grid={{ horizontal: true }}
-            hideLegend
+            sx={{
+              "& .MuiAreaElement-series-Leads": {
+                fill: alpha(theme.palette.primary.main, 0.12),
+              },
+            }}
+            slotProps={{
+              legend: {
+                sx: { fontSize: 12 },
+              },
+            }}
           />
+        </Card>
+      </Grid>
+
+      {/* Pipeline funnel */}
+      <Grid size={{ xs: 12, md: 5 }}>
+        <Card sx={{ p: 2.5, height: "100%", display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", mb: 2 }}>
+            <Box>
+              <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 700 }}>
+                Pipeline funnel
+              </Typography>
+              <Typography sx={{ fontSize: 13, color: "text.secondary" }}>
+                {totalLeads} total leads
+              </Typography>
+            </Box>
+            <Box sx={{ textAlign: "right" }}>
+              <Typography sx={{ fontFamily: MONO, fontSize: 24, fontWeight: 700, lineHeight: 1, color: "success.main" }}>
+                {conversion}%
+              </Typography>
+              <Typography sx={{ fontSize: 11, color: "text.secondary" }}>conversion</Typography>
+            </Box>
+          </Box>
+
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+            {funnel.map((f, i) => (
+              <Box key={f.label}>
+                <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.5 }}>
+                  <Typography sx={{ fontSize: 12.5, fontWeight: 600 }}>{f.label}</Typography>
+                  <Typography sx={{ fontFamily: MONO, fontSize: 13, fontWeight: 700 }}>
+                    {f.count}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    height: 10,
+                    borderRadius: 5,
+                    bgcolor: (t) => alpha(t.palette.text.primary, 0.06),
+                    overflow: "hidden",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      height: "100%",
+                      width: `${Math.max(f.count ? 6 : 0, (f.count / funnelMax) * 100)}%`,
+                      borderRadius: 5,
+                      bgcolor: funnelColors[i],
+                      transition: "width .3s ease",
+                    }}
+                  />
+                </Box>
+              </Box>
+            ))}
+          </Box>
         </Card>
       </Grid>
 
@@ -225,7 +331,7 @@ export default function DashboardView({ data }: { data: DashboardData }) {
                           lineHeight: 1,
                         }}
                       >
-                        <Typography sx={{ fontFamily: (t) => t.typography.caption.fontFamily, fontSize: 15, fontWeight: 700 }}>
+                        <Typography sx={{ fontFamily: MONO, fontSize: 15, fontWeight: 700 }}>
                           {d.getDate()}
                         </Typography>
                         <Typography sx={{ fontSize: 9, textTransform: "uppercase", opacity: 0.8 }}>
