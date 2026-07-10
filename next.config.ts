@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Permissions-Policy",
-            value: `microphone=(self "${HELIX}"), camera=(self "${HELIX}")`,
+            value: `microphone=(self "${HELIX}"), camera=(self "${HELIX}"), autoplay=(self "${HELIX}")`,
           },
         ],
       },
