@@ -32,7 +32,7 @@ export default function WhoWeAre() {
               </h2>
               <div className="flex flex-col gap-[8px] text-[16px] leading-[24px] text-[#454745]">
                 <p className="pt-[6px]">
-                  Readymade Solutions is an enterprise software development
+                  Readymade Solution is an enterprise software development
                   company
                   <br className="max-lg:hidden" />
                   helping businesses unlock growth through intelligent

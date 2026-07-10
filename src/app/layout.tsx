@@ -30,6 +30,13 @@ export const metadata: Metadata = {
   title: "Readymade Solutions — We build software that scales with you",
   description:
     "Engineering intelligent software, AI automation, and enterprise infrastructure for ambitious businesses.",
+  icons: {
+    icon: [
+      { url: "/favicon-black.png", type: "image/png", media: "(prefers-color-scheme: light)" },
+      { url: "/favicon-white.png", type: "image/png", media: "(prefers-color-scheme: dark)" },
+    ],
+    apple: "/favicon-black.png",
+  },
 };
 
 export default function RootLayout({

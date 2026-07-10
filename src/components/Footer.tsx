@@ -144,11 +144,11 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-wrap items-center justify-center border-t border-secondary-100/20 pt-6">
           <div className="flex items-center gap-6 font-sans text-[13px] text-secondary-300">
-            <span>Copyright © Readymade Solutions 2026</span>
+            <span>Copyright © Readymade Solution 2026</span>
             <span className="size-1 rounded-full bg-secondary-300" aria-hidden />
-            <a href="#">Privacy</a>
+            <Link href="/privacy">Privacy</Link>
             <span className="size-1 rounded-full bg-secondary-300" aria-hidden />
-            <a href="#">Terms</a>
+            <Link href="/terms">Terms</Link>
           </div>
         </div>
       </div>
