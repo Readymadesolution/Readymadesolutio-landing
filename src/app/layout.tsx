@@ -27,7 +27,7 @@ const faktum = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Readymade Solutions — We build software that scales with you",
+  title: "ReadyMade Solution — We build software that scales with you",
   description:
     "Engineering intelligent software, AI automation, and enterprise infrastructure for ambitious businesses.",
   icons: {

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import LegalPage, { type LegalSection } from "@/components/legal/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Readymade Solution",
+  title: "Privacy Policy — ReadyMade Solution",
   description:
-    "How Readymade Solution collects, uses, discloses, and protects your personal information.",
+    "How ReadyMade Solution collects, uses, discloses, and protects your personal information.",
 };
 
 const sections: LegalSection[] = [
@@ -12,7 +12,7 @@ const sections: LegalSection[] = [
     heading: "1. Who we are",
     body: (
       <p>
-        Readymade Solution (&ldquo;Readymade Solution&rdquo;, &ldquo;we&rdquo;,
+        ReadyMade Solution (&ldquo;ReadyMade Solution&rdquo;, &ldquo;we&rdquo;,
         &ldquo;us&rdquo;, or &ldquo;our&rdquo;) is an enterprise software
         development company located at 330 5th Avenue SW, Suite 1800, Calgary,
         Alberta, T2P 0L4, Canada. We are responsible for the personal
@@ -155,7 +155,7 @@ export default function PrivacyPage() {
       updated="July 8, 2026"
       intro={
         <p>
-          This Privacy Policy explains how Readymade Solution collects, uses,
+          This Privacy Policy explains how ReadyMade Solution collects, uses,
           discloses, and protects your personal information when you visit our
           website or use our services. We are committed to handling your
           personal information in accordance with Canada&rsquo;s Personal

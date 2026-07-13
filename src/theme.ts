@@ -3,7 +3,7 @@
 import { createTheme } from "@mui/material/styles";
 
 /**
- * Readymade console theme — maps the Figma design system onto MUI v9.
+ * ReadyMade console theme — maps the Figma design system onto MUI v9.
  * Fonts come from next/font CSS variables set in the root layout.
  */
 const faktum = "var(--font-faktum), var(--font-hanken), system-ui, sans-serif";

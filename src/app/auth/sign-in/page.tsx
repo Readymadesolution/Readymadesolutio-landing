@@ -20,7 +20,7 @@ export default function SignInPage() {
           Sign in
         </Typography>
         <Typography sx={{ fontSize: 14, color: "text.secondary", mt: 0.5 }}>
-          Welcome back to the Readymade console.
+          Welcome back to the ReadyMade console.
         </Typography>
       </Box>
 

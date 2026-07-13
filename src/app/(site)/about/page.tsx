@@ -7,7 +7,7 @@ import { HeroEnter, Reveal, Stagger, StaggerItem } from "@/components/motion";
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], weight: "700" });
 
 export const metadata: Metadata = {
-  title: "About Us — Readymade Solutions",
+  title: "About Us — ReadyMade Solution",
   description:
     "An enterprise software development company helping businesses unlock growth through intelligent software, AI automation and reliable infrastructure.",
 };
@@ -63,7 +63,7 @@ export default function AboutPage() {
         <div className="flex flex-col items-center justify-center gap-9 py-10 text-center lg:h-[374px] lg:py-0">
           <HeroEnter index={0}>
             <p className="text-[16px] font-bold uppercase leading-6 text-[#269c80]">
-              About Readymade
+              About ReadyMade
             </p>
           </HeroEnter>
           <HeroEnter index={1}>
@@ -85,7 +85,7 @@ export default function AboutPage() {
           <div className="relative mt-[10px] h-[300px] w-full overflow-hidden rounded-[20px] lg:h-[524px]">
             <Image
               src="/assets/about/office-photo.png"
-              alt="The Readymade team working together in the office"
+              alt="The ReadyMade team working together in the office"
               fill
               sizes="(min-width: 1024px) 1280px, 100vw"
               className="object-cover"
@@ -108,7 +108,7 @@ export default function AboutPage() {
         />
         <div className="relative flex flex-col gap-6">
           <p className="text-[16px] font-bold uppercase leading-6 text-[#269c80]">
-            About Readymade
+            About ReadyMade
           </p>
           <div className="flex flex-col items-center gap-16 lg:flex-row lg:gap-[60px]">
             <Reveal className="min-w-0 flex-1 pt-[5px]">
@@ -118,7 +118,7 @@ export default function AboutPage() {
                 </h2>
                 <div className="pt-[5.7px] text-[16px] leading-6 text-[#464646]">
                   <p>
-                    We started Readymade with a simple belief: powerful
+                    We started ReadyMade with a simple belief: powerful
                     software shouldn&apos;t take years to ship. From customer
                     acquisition and lead management to automation and
                     operational efficiency, we build digital products that
@@ -139,7 +139,7 @@ export default function AboutPage() {
                 <div className="relative h-[300px] w-full lg:h-[400px]">
                   <Image
                     src="/assets/about/team-photo.png"
-                    alt="The Readymade team gathered around a laptop"
+                    alt="The ReadyMade team gathered around a laptop"
                     fill
                     sizes="(min-width: 1024px) 570px, 100vw"
                     className="object-cover"

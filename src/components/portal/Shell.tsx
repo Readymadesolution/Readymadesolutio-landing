@@ -83,7 +83,7 @@ function DrawerContent({
         <Box
           component="img"
           src="/assets/logo-mark.png"
-          alt="Readymade"
+          alt="ReadyMade"
           sx={{ width: 32, height: 29, objectFit: "contain" }}
         />
         <Box sx={{ lineHeight: 1 }}>

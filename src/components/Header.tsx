@@ -16,7 +16,7 @@ export function Logo({ dark = false }: { dark?: boolean }) {
     <Link href="/" className="flex items-center justify-center gap-2">
       <Image
         src={dark ? "/assets/logo-footer.svg" : "/assets/logo-mark.png"}
-        alt="Readymade Solutions"
+        alt="ReadyMade Solution"
         width={60}
         height={55}
         className="h-[44px] w-[48px] object-contain lg:h-[55px] lg:w-[60px]"

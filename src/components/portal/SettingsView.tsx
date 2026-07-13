@@ -21,7 +21,7 @@ import CheckCircleOutlined from "@mui/icons-material/CheckCircleOutlined";
 import { authClient } from "@/lib/auth/client";
 import { saveGoals, type GoalValues } from "@/app/portal/goals-actions";
 
-const ORG_NAME = "Readymade Solutions";
+const ORG_NAME = "ReadyMade Solution";
 
 type FieldKey = keyof GoalValues;
 

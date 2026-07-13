@@ -52,7 +52,7 @@ type Invitation = {
   role: Role;
 };
 
-const ORG_NAME = "Readymade Solutions";
+const ORG_NAME = "ReadyMade Solution";
 const ORG_SLUG = "readymade";
 
 const roleChipColor: Record<Role, "default" | "primary" | "secondary"> = {

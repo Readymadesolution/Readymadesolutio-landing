@@ -44,7 +44,7 @@ export default function Hero() {
         <HeroEnter index={3} className="shrink-0 max-lg:w-full max-lg:shrink">
           <Image
             src="/assets/home/hero-collage.png"
-            alt="Readymade product collage"
+            alt="ReadyMade product collage"
             width={602}
             height={484}
             priority

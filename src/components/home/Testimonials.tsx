@@ -11,7 +11,7 @@ type Testimonial = {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      '"Readymade rebuilt our platform from the ground up - smoother onboarding, clearer wallets and automated payouts. It has scaled cleanly ever since."',
+      '"ReadyMade rebuilt our platform from the ground up - smoother onboarding, clearer wallets and automated payouts. It has scaled cleanly ever since."',
     initials: "KA",
     name: "Kunle Adebayo",
     role: "Product Lead, Ajopro",

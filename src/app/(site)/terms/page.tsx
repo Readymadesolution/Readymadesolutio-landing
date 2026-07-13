@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import LegalPage, { type LegalSection } from "@/components/legal/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Readymade Solution",
+  title: "Terms of Service — ReadyMade Solution",
   description:
-    "The terms and conditions governing your use of the Readymade Solution website and services.",
+    "The terms and conditions governing your use of the ReadyMade Solution website and services.",
 };
 
 const sections: LegalSection[] = [
@@ -13,8 +13,8 @@ const sections: LegalSection[] = [
     body: (
       <p>
         These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and
-        use of the website and services provided by Readymade Solution
-        (&ldquo;Readymade Solution&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or
+        use of the website and services provided by ReadyMade Solution
+        (&ldquo;ReadyMade Solution&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or
         &ldquo;our&rdquo;). By accessing or using our website or services, you
         agree to be bound by these Terms. If you do not agree, please do not use
         the website or services.
@@ -25,7 +25,7 @@ const sections: LegalSection[] = [
     heading: "2. Our services",
     body: (
       <p>
-        Readymade Solution provides software development, AI automation, and
+        ReadyMade Solution provides software development, AI automation, and
         related consulting and engineering services. The scope, deliverables,
         fees, and timelines for any engagement are set out in a separate written
         agreement, statement of work, or proposal between you and us. In the
@@ -66,7 +66,7 @@ const sections: LegalSection[] = [
       <p>
         Unless otherwise agreed in writing, all content on this website —
         including text, graphics, logos, and software — is owned by or licensed
-        to Readymade Solution and is protected by applicable intellectual
+        to ReadyMade Solution and is protected by applicable intellectual
         property laws. Ownership of deliverables created during a paid
         engagement is governed by the applicable engagement agreement.
       </p>
@@ -99,7 +99,7 @@ const sections: LegalSection[] = [
     heading: "8. Limitation of liability",
     body: (
       <p>
-        To the maximum extent permitted by applicable law, Readymade Solution
+        To the maximum extent permitted by applicable law, ReadyMade Solution
         will not be liable for any indirect, incidental, special, consequential,
         or punitive damages, or any loss of profits or revenues, arising out of
         or related to your use of the website. Nothing in these Terms limits
@@ -111,7 +111,7 @@ const sections: LegalSection[] = [
     heading: "9. Indemnification",
     body: (
       <p>
-        You agree to indemnify and hold harmless Readymade Solution and its
+        You agree to indemnify and hold harmless ReadyMade Solution and its
         directors, officers, employees, and agents from any claims, damages, and
         expenses (including reasonable legal fees) arising from your misuse of
         the website or breach of these Terms.
@@ -160,7 +160,7 @@ export default function TermsPage() {
       updated="July 8, 2026"
       intro={
         <p>
-          These Terms of Service set out the rules for using the Readymade
+          These Terms of Service set out the rules for using the ReadyMade
           Solution website and services. Please read them carefully before using
           the site.
         </p>

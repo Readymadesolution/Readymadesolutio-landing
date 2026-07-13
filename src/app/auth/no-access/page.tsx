@@ -38,7 +38,7 @@ export default function NoAccessPage() {
         You don&apos;t have access
       </Typography>
       <Typography sx={{ fontSize: 14, color: "text.secondary", maxWidth: 340 }}>
-        The Readymade console is invite-only. Ask a workspace admin to invite
+        The ReadyMade console is invite-only. Ask a workspace admin to invite
         your email address, then open the invite link they send you.
       </Typography>
       <Button variant="outlined" color="secondary" onClick={signOut} loading={pending} sx={{ mt: 1 }}>

@@ -8,7 +8,7 @@ import { db } from "@/db";
 import { authMember } from "@/db/schema";
 
 export const metadata: Metadata = {
-  title: "Console — Readymade Solutions",
+  title: "Console — ReadyMade Solution",
 };
 
 // Uses auth.getSession() → must render dynamically.
@@ -34,7 +34,7 @@ export default async function PortalLayout({
   if (membership.length === 0) redirect("/auth/no-access");
 
   const user = {
-    name: session.user.name ?? "Readymade Team",
+    name: session.user.name ?? "ReadyMade Team",
     email: session.user.email ?? "",
   };
 

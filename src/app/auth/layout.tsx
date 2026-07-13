@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import MuiProvider from "@/components/portal/MuiProvider";
 
 export const metadata: Metadata = {
-  title: "Sign in — Readymade Console",
+  title: "Sign in — ReadyMade Console",
 };
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
@@ -28,7 +28,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <Box
             component="img"
             src="/assets/logo-mark.png"
-            alt="Readymade"
+            alt="ReadyMade"
             sx={{ width: 36, height: 33, objectFit: "contain" }}
           />
           <Box sx={{ lineHeight: 1 }}>

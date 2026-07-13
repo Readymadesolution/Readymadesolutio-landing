@@ -248,7 +248,7 @@ function AcceptInvitation() {
   return (
     <Box component="form" onSubmit={onSubmitCredentials} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
       <Box>
-        <Typography variant="h5" sx={{ fontWeight: 700 }}>Join Readymade Solutions</Typography>
+        <Typography variant="h5" sx={{ fontWeight: 700 }}>Join ReadyMade Solution</Typography>
         <Typography sx={{ fontSize: 14, color: "text.secondary", mt: 0.5 }}>
           Set a password to accept your invite and access the console.
         </Typography>

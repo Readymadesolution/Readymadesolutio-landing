@@ -22,7 +22,7 @@ export default function SignUpPage() {
           Create account
         </Typography>
         <Typography sx={{ fontSize: 14, color: "text.secondary", mt: 0.5 }}>
-          Set up access to the Readymade console.
+          Set up access to the ReadyMade console.
         </Typography>
       </Box>
 

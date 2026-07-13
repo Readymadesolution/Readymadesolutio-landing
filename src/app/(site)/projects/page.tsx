@@ -5,7 +5,7 @@ import ProjectCard, { type Project } from "@/components/projects/ProjectCard";
 import { HeroEnter, Reveal, Stagger, StaggerItem } from "@/components/motion";
 
 export const metadata: Metadata = {
-  title: "Projects — Readymade Solutions",
+  title: "Projects — ReadyMade Solution",
   description:
     "Six builds from across our portfolio - fintech, e-commerce, telecom and beyond. Real systems, delivered end to end, with measurable outcomes.",
 };
