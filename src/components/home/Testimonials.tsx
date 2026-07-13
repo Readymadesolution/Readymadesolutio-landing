@@ -11,25 +11,25 @@ type Testimonial = {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      '"Readymade rebuilt our onboarding around BO AI and our conversion jumped within the first month. They feel like an extension of our own team."',
-    initials: "AO",
-    name: "Amara Okafor",
-    role: "VP Growth, Lumen Retail",
+      '"Readymade rebuilt our platform from the ground up - smoother onboarding, clearer wallets and automated payouts. It has scaled cleanly ever since."',
+    initials: "KA",
+    name: "Kunle Adebayo",
+    role: "Product Lead, Ajopro",
   },
   {
     quote:
-      '"The Helix Call rollout cut our average wait time in half. The analytics gave our supervisors visibility they never had before."',
+      '"The rollout cut our average wait time in half, and the live analytics gave our supervisors visibility they never had before."',
     initials: "DM",
     name: "Daniel Mensah",
-    role: "COO, Northwind Telecom",
+    role: "Operations Lead, Helix Call",
     dark: true,
   },
   {
     quote:
-      '"Their managed dev team delivered our fintech platform ahead of schedule, and it has scaled cleanly ever since. They genuinely feel like part of our company."',
-    initials: "PS",
-    name: "Priya Sharma",
-    role: "CTO, Vault Financial",
+      '"They moved us to hosted storefronts with integrated payments and unified inventory. Orders that used to slip through the cracks now just work."',
+    initials: "AN",
+    name: "Ada Nwosu",
+    role: "Founder, Botaplace",
   },
 ];
 

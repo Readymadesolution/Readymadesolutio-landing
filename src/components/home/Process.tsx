@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { JetBrains_Mono } from "next/font/google";
 import { Stagger, StaggerItem } from "@/components/motion";
 
@@ -54,12 +53,6 @@ export default function Process() {
           </h2>
         </div>
         <Stagger className="relative grid grid-cols-4 max-lg:grid-cols-1 max-lg:gap-8">
-          {/* real connector layer exported from Figma (node 41:1301) */}
-          <img
-            src="/assets/home/process-connector.png"
-            alt=""
-            className="pointer-events-none absolute left-[76.8px] top-[27px] h-[2px] w-[1126.4px] max-w-none max-lg:hidden"
-          />
           {STEPS.map((step) => (
             <StaggerItem
               key={step.num}
