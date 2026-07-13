@@ -61,7 +61,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-black px-4 pb-[34px] pt-[72px] sm:px-[112px]">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[54px]">
-        <div className="flex flex-col gap-10 md:flex-row md:items-start md:gap-4">
+        <div className="flex flex-col gap-10 md:flex-row md:items-stretch md:gap-4">
           {/* Brand column */}
           <div className="flex w-full flex-col items-start gap-[17px] md:w-[314px]">
             <Logo dark />
@@ -123,18 +123,16 @@ export default function Footer() {
           </div>
 
           {/* Get started */}
-          <div className="flex flex-1 flex-col gap-[71px]">
-            <div className="flex flex-col gap-[14px]">
-              <p className="text-[16px] font-bold uppercase leading-[24px] text-primary-500">
-                Get started
-              </p>
-              <p className="text-[16px] leading-[24px] text-neutral-300">
-                Book a free consultation with our team.
-              </p>
-            </div>
+          <div className="flex flex-1 flex-col gap-[14px]">
+            <p className="text-[16px] font-bold uppercase leading-[24px] text-primary-500">
+              Get started
+            </p>
+            <p className="text-[16px] leading-[24px] text-neutral-300">
+              Book a free consultation with our team.
+            </p>
             <Link
               href="/consultation"
-              className="pressable flex h-12 w-full items-center justify-center rounded-full bg-secondary-0 px-5 font-sans text-[16px] font-bold text-secondary-900"
+              className="pressable mt-6 flex h-12 w-full items-center justify-center rounded-full bg-secondary-0 px-5 font-sans text-[16px] font-bold text-secondary-900 md:mt-auto"
             >
               Book a consultation
             </Link>
