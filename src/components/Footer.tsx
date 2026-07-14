@@ -55,8 +55,8 @@ const COMPANY_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-black px-4 pb-[34px] pt-[72px] sm:px-[112px]">
-      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[54px]">
+    <footer className="w-full bg-black pb-[34px] pt-[72px]">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-[54px] px-[80px] max-lg:px-6">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:gap-8">
           {/* Brand column */}
           <div className="flex flex-col items-start gap-[17px]">
